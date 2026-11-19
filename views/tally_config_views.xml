@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════════════
+         TallyPrime Configuration — Form & List Views
+    ══════════════════════════════════════════════════════════════ -->
+
+    <record id="view_tally_config_form" model="ir.ui.view">
+        <field name="name">tally.config.form</field>
+        <field name="model">tally.config</field>
+        <field name="arch" type="xml">
+            <form string="TallyPrime Configuration">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="test_connection"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-plug"
+                                string="Test Connection"/>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="tally_company_name" placeholder="Your Tally Company Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Odoo Company">
+                            <field name="company_id"/>
+                        </group>
+                        <group string="TallyPrime Gateway">
+                            <field name="tally_host"/>
+                            <field name="tally_port"/>
+                            <field name="timeout"/>
+                            <field name="max_retries"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Ledger Mapping">
+                            <group>
+                                <group string="Account Ledgers">
+                                    <field name="sales_ledger"/>
+                                    <field name="purchase_ledger"/>
+                                    <field name="expense_ledger"/>
+                                </group>
+                                <group string="VAT Ledgers">
+                                    <field name="vat_input_ledger"/>
+                                    <field name="vat_output_ledger"/>
+                                </group>
+                                <group string="Discount &amp; Round-Off Ledgers">
+                                    <field name="discount_allowed_ledger"/>
+                                    <field name="discount_received_ledger"/>
+                                    <field name="round_off_ledger"/>
+                                </group>
+                            </group>
+                            <group string="Payment Ledgers">
+                                <field name="cash_ledger"/>
+                                <field name="bank_ledger"/>
+                            </group>
+                            <group string="Inventory">
+                                <field name="default_godown"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tally_config_list" model="ir.ui.view">
+        <field name="name">tally.config.list</field>
+        <field name="model">tally.config</field>
+        <field name="arch" type="xml">
+            <list string="TallyPrime Configurations">
+                <field name="company_id"/>
+                <field name="tally_company_name"/>
+                <field name="tally_host"/>
+                <field name="tally_port"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_tally_config" model="ir.actions.act_window">
+        <field name="name">TallyPrime Configuration</field>
+        <field name="res_model">tally.config</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════════════
+         TallyPrime Sync — Main Menu Structure
+    ══════════════════════════════════════════════════════════════ -->
+
+    <menuitem id="menu_tally_root"
+              name="TallyPrime Sync"
+              sequence="100"/>
+
+    <menuitem id="menu_tally_config"
+              name="Configuration"
+              parent="menu_tally_root"
+              action="action_tally_config"
+              sequence="10"/>
+
+    <menuitem id="menu_tally_logs_failed"
+              name="Failed Syncs"
+              parent="menu_tally_root"
+              action="action_tally_sync_log"
+              sequence="20"/>
+
+    <menuitem id="menu_tally_logs_all"
+              name="All Sync Logs"
+              parent="menu_tally_root"
+              action="action_tally_sync_log_all"
+              sequence="30"/>
+
+    <menuitem id="menu_tally_retry_wizard"
+              name="Bulk Retry Failed"
+              parent="menu_tally_root"
+              action="action_tally_retry_wizard"
+              sequence="40"/>
+</odoo>

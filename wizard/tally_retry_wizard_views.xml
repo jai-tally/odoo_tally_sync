@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════════════
+         Retry Wizard Views
+    ══════════════════════════════════════════════════════════════ -->
+
+    <record id="view_tally_retry_wizard_form" model="ir.ui.view">
+        <field name="name">tally.retry.wizard.form</field>
+        <field name="model">tally.retry.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Bulk Retry Tally Sync">
+                <sheet>
+                    <group>
+                        <field name="action" widget="radio"/>
+                    </group>
+                    <field name="log_ids">
+                        <list>
+                            <field name="document_ref"/>
+                            <field name="document_type"/>
+                            <field name="state"/>
+                            <field name="retry_count"/>
+                            <field name="error_message"/>
+                        </list>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="execute" type="object" string="Execute" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tally_retry_wizard" model="ir.actions.act_window">
+        <field name="name">Bulk Retry Tally Sync</field>
+        <field name="res_model">tally.retry.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
+

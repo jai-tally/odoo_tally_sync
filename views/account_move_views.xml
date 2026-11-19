@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ══════════════════════════════════════════════════════════════
+         account.move — Tally Sync Fields Added to Invoice/Bill Forms
+    ══════════════════════════════════════════════════════════════ -->
+
+    <record id="view_account_move_tally_form" model="ir.ui.view">
+        <field name="name">account.move.tally.sync.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <!-- Add Tally stat button to button_box -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_tally_logs"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-exchange"
+                        invisible="state != 'posted'">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Tally</span>
+                        <span class="o_stat_value">
+                            <field name="tally_sync_status" widget="badge"
+                                   decoration-success="tally_sync_status == 'synced'"
+                                   decoration-danger="tally_sync_status == 'failed'"
+                                   decoration-warning="tally_sync_status == 'not_synced'"/>
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+
+            <!-- Status ribbons -->
+            <xpath expr="//sheet" position="before">
+                <widget name="web_ribbon" title="Tally Synced ✓"
+                        bg_color="text-bg-success"
+                        invisible="tally_sync_status != 'synced'"/>
+                <widget name="web_ribbon" title="Tally Sync Failed"
+                        bg_color="text-bg-danger"
+                        invisible="tally_sync_status != 'failed'"/>
+            </xpath>
+
+            <!-- Add Tally info tab to notebook -->
+            <xpath expr="//notebook" position="inside">
+                <page string="TallyPrime Sync" invisible="move_type not in ['out_invoice','in_invoice','out_refund','in_refund','in_receipt']">
+                    <group>
+                        <group string="Sync Status">
+                            <field name="tally_sync_status" readonly="1" widget="badge"
+                                   decoration-success="tally_sync_status == 'synced'"
+                                   decoration-danger="tally_sync_status == 'failed'"
+                                   decoration-warning="tally_sync_status == 'not_synced'"/>
+                            <field name="tally_synced_at" readonly="1"/>
+                            <field name="tally_sync_count" readonly="1"/>
+                        </group>
+                        <group string="Error (if any)">
+                            <field name="tally_error" readonly="1"/>
+                        </group>
+                    </group>
+                    <div invisible="state != 'posted'">
+                        <button name="action_sync_to_tally"
+                                type="object"
+                                string="⟳ Push to TallyPrime"
+                                class="btn-primary"
+                                invisible="state != 'posted'"/>
+                        <button name="action_view_tally_logs"
+                                type="object"
+                                string="View Sync Logs"
+                                class="btn-secondary"
+                                invisible="state != 'posted'"/>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

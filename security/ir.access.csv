@@ -1,0 +1,7 @@
+id,name,model_id,group_id/id,operation,domain
+access_tally_config_user,tally.config.user,tally.config,account.group_account_manager,crud,
+access_tally_config_read,tally.config.read,tally.config,account.group_account_readonly,r,
+access_tally_sync_log_user,tally.sync.log.user,tally.sync.log,account.group_account_readonly,r,
+access_tally_sync_log_manager,tally.sync.log.manager,tally.sync.log,account.group_account_manager,crud,
+access_tally_retry_wizard,tally.retry.wizard,tally.retry.wizard,account.group_account_manager,crud,
+
